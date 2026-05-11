@@ -179,17 +179,44 @@ Maceió - AL\\
 \end{capa}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                    RESUMO                       %%
+%%                   SUMÁRIO                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter*{Resumo}
 
-Este trabalho apresenta o desenvolvimento de um aplicativo mobile utilizando React Native, com integração a banco de dados e funcionalidades modernas para dispositivos móveis.
 
-O sistema foi desenvolvido com foco em usabilidade, desempenho e experiência do usuário.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                 INTRODUÇÃO                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{0.5cm}
+\chapter{Introdução}
 
+O cenário tecnológico atual exige sistemas operacionais que transcendam a barreira de um único hardware, e é nesse contexto que o HarmonyOS se destaca como uma proposta de sistema distribuído voltado para a Internet das Coisas (IoT). Diferente de sistemas legados que operam de forma isolada, o HarmonyOS foi projetado para unificar a experiência do usuário em diversos dispositivos, criando um ecossistema onde smartphones, wearables e eletrodomésticos inteligentes operam de maneira integrada. Este relatório detalha a implementação prática deste sistema, os desafios da virtualização e uma análise profunda de como sua arquitetura se diferencia das soluções tradicionais de mercado.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  Estrutura                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Estrutura do Sistema Operacional (SO)}
+
+A arquitetura do HarmonyOS é organizada de forma modular e hierárquica, sendo composta por quatro camadas fundamentais que garantem sua flexibilidade. Na base, encontra-se a Camada de Kernel, que gerencia os recursos de hardware de forma eficiente. Acima desta, a Camada de Serviços do Sistema fornece as capacidades básicas necessárias para o funcionamento de funções distribuídas, como segurança e conectividade. A terceira camada, de Framework, oferece as bibliotecas e ferramentas de desenvolvimento que permitem aos programadores criar aplicações adaptáveis a múltiplos tipos de tela. Por fim, a Camada de Aplicação engloba os softwares finais e a interface com o usuário, completando o ecossistema que permite a interoperabilidade entre dispositivos distintos.
+
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             ANALISE DO KERNEL                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Análise do Kernel}
+
+Um dos aspectos mais sofisticados do HarmonyOS é a sua natureza de arquitetura multi-kernel. O sistema é capaz de se adaptar dinamicamente ao poder de processamento do dispositivo: em equipamentos de alta performance, como smartphones, ele utiliza o Linux Kernel para suportar operações complexas. Por outro lado, para dispositivos de hardware limitado e baixo consumo de energia (IoT), o sistema opera sobre o LiteOS, um kernel de tempo real extremamente eficiente. Essa versatilidade é potencializada pelo uso de um Microkernel, que isola serviços críticos fora do núcleo principal, aumentando drasticamente a estabilidade e a segurança contra vulnerabilidades externas.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Desenvolvimento e Linguagens de Programação     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{}
 
 
 \end{document}
