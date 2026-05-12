@@ -1,0 +1,25 @@
+# Usamos o Ubuntu como base, que é a distro padrão para desenvolvimento do Harmony
+FROM ubuntu:22.04
+
+# Evita perguntas interativas durante a instalação
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instala as ferramentas básicas que o HarmonyOS exige para o Kernel e scripts
+RUN apt-get update && apt-get install -y \
+    binutils \
+    git \
+    python3 \
+    python3-pip \
+    ruby \
+    shellcheck \
+    curl \
+    && apt-get clean
+
+# Define a pasta de trabalho dentro do container
+WORKDIR /home/harmony
+
+# Copia o seu relatório e scripts da sua pasta local para dentro do Docker
+COPY . .
+
+# Comando padrão ao iniciar: abre o terminal
+CMD ["/bin/bash"]
