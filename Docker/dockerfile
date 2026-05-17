@@ -1,10 +1,7 @@
-# Usamos o Ubuntu como base, que é a distro padrão para desenvolvimento do Harmony
 FROM ubuntu:22.04
 
-# Evita perguntas interativas durante a instalação
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Instala as ferramentas básicas que o HarmonyOS exige para o Kernel e scripts
 RUN apt-get update && apt-get install -y \
     binutils \
     git \
@@ -13,13 +10,40 @@ RUN apt-get update && apt-get install -y \
     ruby \
     shellcheck \
     curl \
-    && apt-get clean
+    tree \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Define a pasta de trabalho dentro do container
+RUN useradd -m harmony
+
+RUN mkdir -p \
+    /home/harmony/harmony_os/kernel/liteos_a \
+    /home/harmony/harmony_os/kernel/liteos_m \
+    /home/harmony/harmony_os/kernel/linux \
+    /home/harmony/harmony_os/base/global \
+    /home/harmony/harmony_os/base/hiviewdfx \
+    /home/harmony/harmony_os/base/security \
+    /home/harmony/harmony_os/base/startup \
+    /home/harmony/harmony_os/foundation/aafwk \
+    /home/harmony/harmony_os/foundation/ace \
+    /home/harmony/harmony_os/foundation/appexecfwk \
+    /home/harmony/harmony_os/foundation/communication \
+    /home/harmony/harmony_os/applications \
+    /home/harmony/harmony_os/device \
+    /home/harmony/harmony_os/build \
+    /home/harmony/harmony_os/drivers \
+    /home/harmony/harmony_os/utils \
+    /home/harmony/harmony_os/third_party \
+    /home/harmony/harmony_os/vendor \
+    /home/harmony/harmony_os/prebuilts \
+    && chown -R harmony:harmony /home/harmony
+
+USER harmony
+
 WORKDIR /home/harmony
 
-# Copia o seu relatório e scripts da sua pasta local para dentro do Docker
-COPY . .
+COPY --chown=harmony:harmony . .
 
-# Comando padrão ao iniciar: abre o terminal
-CMD ["/bin/bash"]
+RUN chmod +x scripts/*.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "bash scripts/demo.sh; exec /bin/bash"]
