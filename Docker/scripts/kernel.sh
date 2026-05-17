@@ -1,0 +1,96 @@
+#!/bin/bash
+
+AZUL='\033[0;34m'
+VERDE='\033[0;32m'
+AMARELO='\033[1;33m'
+CIANO='\033[0;36m'
+NC='\033[0m'
+NEGRITO='\033[1m'
+
+clear
+
+echo -e "${AZUL}${NEGRITO}"
+echo "╔══════════════════════════════════════════════════════════════════╗"
+echo "║                    KERNEL DO HARMONYOS                          ║"
+echo "╚══════════════════════════════════════════════════════════════════╝"
+echo -e "${NC}"
+
+echo -e "${VERDE}${NEGRITO}Informações do kernel deste container:${NC}"
+echo ""
+echo -e "  Versão do kernel : ${CIANO}$(uname -r)${NC}"
+echo -e "  Arquitetura      : ${CIANO}$(uname -m)${NC}"
+echo -e "  Sistema          : ${CIANO}$(uname -s)${NC}"
+echo -e "  CPUs disponíveis : ${CIANO}$(nproc)${NC}"
+echo -e "  Memória total    : ${CIANO}$(free -h | awk '/^Mem:/ {print $2}')${NC}"
+echo -e "  Memória livre    : ${CIANO}$(free -h | awk '/^Mem:/ {print $4}')${NC}"
+echo -e "  Uptime           : ${CIANO}$(uptime -p)${NC}"
+echo ""
+
+echo -e "${AMARELO}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+echo -e "${VERDE}${NEGRITO}A abordagem híbrida de kernel do HarmonyOS:${NC}"
+echo ""
+echo "O HarmonyOS é único por suportar TRÊS kernels diferentes,"
+echo "escolhidos automaticamente conforme o tipo de dispositivo:"
+echo ""
+echo -e "${CIANO}┌────────────┬─────────────┬──────────────────────────────────┐${NC}"
+echo -e "${CIANO}│  LiteOS-M  │  LiteOS-A   │         Linux Kernel             │${NC}"
+echo -e "${CIANO}├────────────┼─────────────┼──────────────────────────────────┤${NC}"
+echo -e "${CIANO}│  IoT/MCU   │  Médio porte│  Alto desempenho                 │${NC}"
+echo -e "${CIANO}│  < 1MB RAM │  1-128MB    │  > 128MB RAM                     │${NC}"
+echo -e "${CIANO}│  Sem MMU   │  Com MMU    │  MMU + todas as features         │${NC}"
+echo -e "${CIANO}└────────────┴─────────────┴──────────────────────────────────┘${NC}"
+echo ""
+
+echo -e "${AMARELO}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+echo -e "${VERDE}${NEGRITO}LiteOS-M (Microkernel para IoT):${NC}"
+echo "  • RTOS (Real-Time Operating System) ultracompacto"
+echo "  • Ocupa menos de 10KB de memória Flash"
+echo "  • Voltado para microcontroladores ARM Cortex-M"
+echo "  • Sem MMU — sem memória virtual, sem processos isolados"
+echo "  • Escalonamento preemptivo em tempo real"
+echo "  • Dispositivos: sensores, fechaduras, lâmpadas IoT"
+echo ""
+
+echo -e "${VERDE}${NEGRITO}LiteOS-A (Kernel completo para médios):${NC}"
+echo "  • Suporte a MMU (Memória Virtual e processos isolados)"
+echo "  • Threads e processos compatíveis com POSIX"
+echo "  • Sistemas de arquivos: FAT, JFFS2, NFS, RAMFS"
+echo "  • Drivers de rede, USB e câmera"
+echo "  • Dispositivos: câmeras IP, roteadores, painéis inteligentes"
+echo ""
+
+echo -e "${VERDE}${NEGRITO}Linux Kernel (alto desempenho):${NC}"
+echo "  • Kernel Linux versões 4.19 LTS e 5.10 LTS"
+echo "  • Suporte completo a todos os recursos modernos"
+echo "  • Base dos smartphones Huawei com HarmonyOS"
+echo "  • Compatível com drivers Android (AOSP)"
+echo "  • Dispositivos: smartphones, tablets, notebooks"
+echo ""
+
+echo -e "${AMARELO}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+echo -e "${VERDE}${NEGRITO}Diferenciais do kernel HarmonyOS:${NC}"
+echo ""
+echo "  1. TEMPO REAL   → Escalonamento determinístico para IoT crítico"
+echo "  2. SEGURANÇA    → Isolamento via TEE (Trusted Execution Environment)"
+echo "  3. DISTRIBUÍDO  → Comunicação entre dispositivos via SoftBus"
+echo "  4. EFICIÊNCIA   → Boot em menos de 1 segundo no LiteOS-M"
+echo "  5. MODULARIDADE → Um SO, múltiplos kernels, múltiplos dispositivos"
+echo ""
+
+echo -e "${AMARELO}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+echo -e "${VERDE}${NEGRITO}SoftBus — o coração distribuído:${NC}"
+echo ""
+echo "O SoftBus é o barramento de comunicação que conecta todos os"
+echo "dispositivos HarmonyOS como se fossem um único sistema:"
+echo ""
+echo "  Smartphone ←──SoftBus──→ SmartTV"
+echo "       ↕                        ↕"
+echo "  Smartwatch ←──SoftBus──→ Tablet"
+echo ""
+echo "  Permite: compartilhar câmera, tela, armazenamento e apps"
+echo "  entre dispositivos de forma transparente ao usuário."
+echo ""
