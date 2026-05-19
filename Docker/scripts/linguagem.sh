@@ -11,7 +11,7 @@ clear
 
 echo -e "${AZUL}${NEGRITO}"
 echo "╔══════════════════════════════════════════════════════════════════╗"
-echo "║           LINGUAGENS DE PROGRAMAÇÃO NO HARMONYOS               ║"
+echo "║           LINGUAGENS DE PROGRAMAÇÃO NO HARMONYOS                 ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 

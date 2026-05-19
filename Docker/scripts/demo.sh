@@ -11,8 +11,8 @@ clear
 echo -e "${AZUL}${NEGRITO}"
 cat << 'EOF'
 ╔══════════════════════════════════════════════════════════════════╗
-║        HARMONYOS (OpenHarmony) - Demonstração AV2               ║
-║              Sistema Operacional da Huawei                      ║
+║        HARMONYOS (OpenHarmony) - Demonstração AV2                ║
+║              Sistema Operacional da Huawei                       ║
 ╚══════════════════════════════════════════════════════════════════╝
 EOF
 echo -e "${NC}"

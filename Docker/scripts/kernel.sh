@@ -11,7 +11,7 @@ clear
 
 echo -e "${AZUL}${NEGRITO}"
 echo "╔══════════════════════════════════════════════════════════════════╗"
-echo "║                    KERNEL DO HARMONYOS                          ║"
+echo "║                    KERNEL DO HARMONYOS                           ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 

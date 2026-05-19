@@ -11,7 +11,7 @@ clear
 
 echo -e "${AZUL}${NEGRITO}"
 echo "╔══════════════════════════════════════════════════════════════════╗"
-echo "║             ESTRUTURA DO HARMONYOS (OpenHarmony)                ║"
+echo "║             ESTRUTURA DO HARMONYOS (OpenHarmony)                 ║"
 echo "╚══════════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -87,7 +87,7 @@ echo "  │       FRAMEWORK (foundation/ + base/)                │"
 echo "  ├──────────────────────────────────────────────────────┤"
 echo "  │   ABSTRAÇÃO DE HARDWARE - HDF (drivers/)             │"
 echo "  ├──────────────────────────────────────────────────────┤"
-echo "  │   KERNEL: LiteOS-M | LiteOS-A | Linux (kernel/)     │"
+echo "  │   KERNEL: LiteOS-M | LiteOS-A | Linux (kernel/)      │"
 echo "  ├──────────────────────────────────────────────────────┤"
 echo "  │                    HARDWARE                          │"
 echo "  └──────────────────────────────────────────────────────┘"
