@@ -1,0 +1,213 @@
+
+\documentclass[
+    12pt,
+    oneside,
+    openright,
+    a4paper,
+    english,
+    brazil
+]{abntex2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  PACOTES                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{etoolbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%            CONFIGURAÇÕES GERAIS                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\OnehalfSpacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%          CAMINHO DAS IMAGENS                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{imagens/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%        REMOVE PÁGINAS EM BRANCO                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\patchcmd{\chapter}
+{\if@openright\cleardoublepage\else\clearpage\fi}
+{\clearpage}{}{}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         CONFIGURAÇÃO DE CÓDIGOS                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{green},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{black},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  INÍCIO                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                    CAPA                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{capa}
+
+\begin{center}
+
+\includegraphics[width=5cm]{logo-uninassau.png}
+
+\vspace{1cm}
+
+{\large \textbf{CENTRO UNIVERSITÁRIO MAURÍCIO DE NASSAU}}
+
+\vspace{0.3cm}
+
+{\large CURSO DE CIÊNCIA DA COMPUTAÇÃO}
+
+\vspace{3cm}
+
+{\Huge \textbf{HARMONYOS}}
+
+\vspace{1cm}
+
+
+
+\vspace{3cm}
+
+\textbf{Integrantes}
+
+João Pedro Rodrigues Araujo \\
+José Guilherme Marques Nunes\\
+Jonas Paulo da Silva \\
+Fabrício Henrique de Araujo\\
+Leonardo José Mendes da Silva Filho\\
+Victor Manoel dos Santos\\
+
+\vfill
+
+Disciplina: Sistemas Operacionais\\
+Professor(a): Anderlan Siqueira\\
+
+\vspace{2cm}
+
+Maceió - AL\\
+2026
+
+\end{center}
+
+\end{capa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                 CONTRACAPA                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{capa}
+
+\begin{center}
+
+João Pedro Rodrigues Araujo \\
+José Guilherme Marques Nunes\\
+Jonas Paulo da Silva \\
+Fabrício Henrique de Araujo\\
+Leonardo José Mendes da Silva Filho\\
+Victor Manoel dos Santos\\
+
+\vspace{4cm}
+
+{\Large \textbf{HARMONYOS}}
+
+\vspace{4cm}
+
+\begin{flushright}
+
+Trabalho apresentado à disciplina de Sistemas Operacionais do curso de Ciência da Computação do Centro Universitário Maurício de Nassau — UNINASSAU, como requisito parcial para obtenção da nota da AV2.
+
+\vspace{1cm}
+
+Professor(a): Anderlan Siqueira
+
+\end{flushright}
+
+\vfill
+
+Maceió - AL\\
+2026
+
+\end{center}
+
+\end{capa}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                 INTRODUÇÃO                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introdução}
+
+O cenário tecnológico atual exige sistemas operacionais que transcendam a barreira de um único hardware, e é nesse contexto que o HarmonyOS se destaca como uma proposta de sistema distribuído voltado para a Internet das Coisas (IoT). Desenvolvido pela Huawei e lançado em 2019 — em parte como resposta às sanções americanas que bloquearam o acesso da empresa ao Android — o sistema, conhecido internamente como 鸿蒙 (Hóngméng), foi projetado para unificar a experiência do usuário em diversos dispositivos. Sua versão open source, o OpenHarmony, é mantida pela fundação OpenAtom e já impulsionou a presença do sistema em mais de 700 milhões de dispositivos até 2023. Diferente de sistemas legados que operam de forma isolada, o HarmonyOS cria um ecossistema onde smartphones, wearables e eletrodomésticos inteligentes operam de maneira integrada. Este relatório detalha a implementação prática deste sistema por meio de um container Docker, os desafios da virtualização e uma análise profunda de como sua arquitetura se diferencia das soluções tradicionais de mercado.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  Estrutura                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Estrutura do Sistema Operacional (SO)}
+
+A arquitetura do HarmonyOS é organizada de forma modular e hierárquica, sendo composta por quatro camadas fundamentais que garantem sua flexibilidade. Na base, encontra-se a Camada de Kernel, responsável por gerenciar os recursos de hardware de forma eficiente. Um dos diferenciais mais notáveis do HarmonyOS é o suporte a três kernels distintos — LiteOS-M, LiteOS-A e Linux —, selecionados automaticamente conforme as capacidades do dispositivo, o que permite ao sistema operar desde microcontroladores IoT com menos de 1MB de RAM até smartphones de alto desempenho. Acima desta, a Camada de Serviços do Sistema fornece as capacidades básicas para o funcionamento distribuído, destacando-se o SoftBus, barramento de comunicação que conecta dispositivos heterogêneos como se fossem um único sistema, e o HDF (Hardware Driver Foundation), que abstrai e unifica os drivers de hardware entre fabricantes. A terceira camada, de Framework, oferece as bibliotecas e ferramentas de desenvolvimento que permitem aos programadores criar aplicações adaptáveis a múltiplos tipos de tela, tendo como peça central o ACE (Adaptive Component Engine), motor de UI declarativa capaz de ajustar automaticamente a interface para smartwatches, smartphones e televisões. Por fim, a Camada de Aplicação engloba os softwares finais e a interface com o usuário, estruturada sobre o conceito de Abilities — divididas em Feature Ability (FA) para interfaces visuais e Particle Ability (PA) para serviços em segundo plano —, substituindo o modelo tradicional de Activities do Android. Toda essa estrutura é construída sobre o repositório open source do OpenHarmony, disponível para fabricantes de hardware adaptarem ao seus próprios dispositivos, completando o ecossistema que permite a interoperabilidade entre dispositivos distintos.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             ANALISE DO KERNEL                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Análise do Kernel}
+
+Um dos aspectos mais sofisticados do HarmonyOS é a sua natureza de arquitetura multi-kernel. O sistema é capaz de se adaptar dinamicamente ao poder de processamento do dispositivo, sendo essa flexibilidade o alicerce que sustenta toda a arquitetura em camadas descrita anteriormente. Em equipamentos de alta performance, como smartphones e tablets, o HarmonyOS utiliza o Linux Kernel — nas versões estáveis 4.19 LTS e 5.10 LTS — para suportar operações complexas e garantir compatibilidade com drivers Android existentes. Para dispositivos de médio porte, como câmeras IP e roteadores, o sistema opera sobre o LiteOS-A, kernel que já oferece suporte a MMU, permitindo memória virtual e processos isolados com compatibilidade POSIX. Por outro lado, para dispositivos de hardware extremamente limitado, como sensores e microcontroladores IoT, entra o LiteOS-M, um RTOS ultracompacto que ocupa menos de 10KB de memória Flash, opera sem MMU e utiliza escalonamento preemptivo determinístico, garantindo respostas em microssegundos — essencial para aplicações críticas como sensores médicos e industriais. Essa versatilidade é potencializada pelo uso de um Microkernel, que isola serviços críticos fora do núcleo principal, aumentando drasticamente a estabilidade e a segurança contra vulnerabilidades externas. Complementando essa camada de proteção, o HarmonyOS implementa o TEE (Trusted Execution Environment), um ambiente de execução isolado que salvaguarda operações sensíveis como pagamentos e autenticação biométrica, mesmo em cenários onde o kernel principal venha a ser comprometido.
+
+
+
+\end{document}
